@@ -175,4 +175,6 @@ hs protect --config config.yaml
 Deploy: Use the protected app in the output directory.
 f you want to contribute or learn more, please contact: germainluperto@gmail.com 
 
+Note: The source code published here has been intentionally sanitized and partially redacted to protect critical and proprietary logic. This measure is taken to prevent unauthorized use or theft of the core intellectual property.
+
 Thank you for checking out Hidden Secrets!
