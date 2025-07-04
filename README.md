@@ -75,62 +75,7 @@ HS adopts a multi-layered, proactive approach to create an impenetrable barrier 
 ---
 
 ## Architecture Overview
-
-+-------------------+       +-----------------------+
-|                   |       |                       |
-| User / Business   | ----> | Hidden Secrets Toolchain CLI |
-|                   |       |                       |
-+-------------------+       +-----------------------+
-                                |
-                                V
-                       +-----------------------+
-                       |                       |
-                       | Core (Config,         |
-                       | Preliminary Analysis) |
-                       |                       |
-                       +-----------------------+
-                                |
-                                V
-                       +-----------------------+
-                       |                       |
-                       | Engines               |
-                       | (Obfuscation, AI)     |
-                       |                       |
-                       +-----------------------+
-                                |
-                                V
-                       +-----------------------+
-                       |                       |
-                       | Packagers             |
-                       | (Bundling Shield)     |
-                       |                       |
-                       +-----------------------+
-                                |
-                                V
-                +----------------------------------------+
-                |                                        |
-                | Protected Application + Shield Runtime |
-                |       (C++ / Native)                   |
-                |   - Continuous monitoring              |
-                |   - Threat reaction                    |
-                +----------------------------------------+
-                                |
-                                V
-                       +-----------------------+
-                       |                       |
-                       | Telemetry Data        |
-                       |                       |
-                       +-----------------------+
-                                |
-                                V
-                       +-----------------------+
-                       |                       |
-                       | AI Backend            |
-                       | (Analysis, Strategy)  |
-                       |                       |
-                       +-----------------------+
-
-
+pre> ```text Architecture Overview +-------------------+ +-----------------------+ | | | | | User / Business | ----> | Hidden Secrets Toolchain CLI | | | | | +-------------------+ +-----------------------+ | V +-----------------------+ | | | Core (Config, | | Preliminary Analysis) | | | +-----------------------+ | V +-----------------------+ | | | Engines | | (Obfuscation, AI) | | | +-----------------------+ | V +-----------------------+ | | | Packagers | | (Bundling Shield) | | | +-----------------------+ | V +----------------------------------------+ | | | Protected Application + Shield Runtime | | (C++ / Native) | | - Continuous monitoring | | - Threat reaction | +----------------------------------------+ | V +-----------------------+ | | | Telemetry Data | | | +-----------------------+ | V +-----------------------+ | | | AI Backend | | (Analysis, Strategy) | | | +-----------------------+ ``` </pre>
 
 
 
