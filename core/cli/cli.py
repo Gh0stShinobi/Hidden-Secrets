@@ -1,3 +1,5 @@
+This CLI is a mocked demonstration version for the crowdfunding campaign. It does not contain the core protection logic or real obfuscation features.
+
 # core/cli/cli.py
 
 import click
