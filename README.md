@@ -158,10 +158,11 @@ Architecture Overview
 
 ### Installation (Conceptual)
 
+Clone the repository and navigate into it:
+
 bash
-git clone https://github.com/your_repo/hidden-secrets.git
-cd hidden-secrets
-python setup_main.py install
+git clone https://github.com/Gh0stShinobi/Hidden-Secrets.git
+cd Hidden-Secrets
 
 
 Basic Protection Workflow
