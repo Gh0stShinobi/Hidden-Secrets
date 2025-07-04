@@ -76,8 +76,6 @@ HS adopts a multi-layered, proactive approach to create an impenetrable barrier 
 
 ## Architecture Overview
 
-## Architecture Overview
-
 +-------------------+       +-----------------------+
 |                   |       |                       |
 | User / Business   | ----> | Hidden Secrets Toolchain CLI |
@@ -87,48 +85,48 @@ HS adopts a multi-layered, proactive approach to create an impenetrable barrier 
                                 V
                        +-----------------------+
                        |                       |
-                       | Core (Config,          |
-                       | Preliminary Analysis)  |
+                       | Core (Config,         |
+                       | Preliminary Analysis) |
                        |                       |
                        +-----------------------+
                                 |
                                 V
                        +-----------------------+
                        |                       |
-                       | Engines                |
-                       | (Obfuscation, AI)      |
+                       | Engines               |
+                       | (Obfuscation, AI)     |
                        |                       |
                        +-----------------------+
                                 |
                                 V
                        +-----------------------+
                        |                       |
-                       | Packagers              |
-                       | (Bundling Shield)      |
+                       | Packagers             |
+                       | (Bundling Shield)     |
                        |                       |
                        +-----------------------+
                                 |
                                 V
-                +----------------------------------+
-                |                                  |
-                | Protected Application + Shield   |
-                | Runtime (C++ / Native)            |
-                |  - Continuous monitoring          |
-                |  - Threat reaction                |
-                +----------------------------------+
+                +----------------------------------------+
+                |                                        |
+                | Protected Application + Shield Runtime |
+                |       (C++ / Native)                   |
+                |   - Continuous monitoring              |
+                |   - Threat reaction                    |
+                +----------------------------------------+
                                 |
                                 V
                        +-----------------------+
                        |                       |
-                       | Telemetry Data         |
+                       | Telemetry Data        |
                        |                       |
                        +-----------------------+
                                 |
                                 V
                        +-----------------------+
                        |                       |
-                       | AI Backend (Data       |
-                       | Analysis, Strategies)  |
+                       | AI Backend            |
+                       | (Analysis, Strategy)  |
                        |                       |
                        +-----------------------+
 
