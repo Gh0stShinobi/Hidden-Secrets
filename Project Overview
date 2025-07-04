@@ -1,0 +1,41 @@
+Hidden Secrets - Project Overview
+
+1. Introduction
+
+Hidden Secrets (HS) is an advanced software protection system designed to safeguard applications against reverse engineering, tampering, and unauthorized analysis. It employs a multi-layered approach that combines sophisticated obfuscation techniques, built-in self-defense mechanisms via a protective runtime "Shield," and adaptive artificial intelligence to counter modern threats. The primary goal of HS is to make code analysis extremely difficult and costly for attackers, while preserving the original functionality of the protected software.
+
+2. Overall Architecture
+
+HS is modular and structured into main components that work together to provide comprehensive protection:
+
+Core: Central modules managing the command-line interface (CLI), configuration, hardware detection, and preliminary code analysis.
+Engines: Specialized modules applying obfuscation techniques and integrating AI-driven analysis.
+Packagers: Components responsible for compiling, bundling obfuscated code with the Shield, and producing the final executable for multiple languages and platforms.
+Shield Runtime: A native or VM-specific component providing runtime self-protection, including anti-debug, anti-tampering, and secure loading of obfuscated payloads.
+Recon & AI Tool: A set of utilities and a database for data collection, labeling, and AI model training to continuously enhance protection strategies.
+3. Key Features and Modules
+
+Core
+Handles fundamental operations like CLI commands, configuration management, hardware profiling, and initial code analysis.
+
+Engines
+Implement advanced code transformation and obfuscation methods, with an AI integrator that helps adapt protection dynamically.
+
+Packagers
+Manage final compilation and bundling processes per programming language, ensuring that protected applications are correctly wrapped with the Shield.
+
+Shield Runtime
+Executes first at runtime to monitor, detect, and react to debugging or tampering attempts, enforce integrity checks, and securely load the protected code.
+
+Recon & AI Tool
+Supports data gathering, manual labeling, and training of AI models that enhance the obfuscation techniques and detection of threats.
+
+4. Benefits
+
+Multi-layered Protection: Combining static code obfuscation and active runtime defense.
+Adaptive Intelligence: AI integration allows continuous learning and evolution against emerging threats.
+Strong Anti-Reverse Engineering: Significantly increases effort and complexity for attackers.
+Self-Defending Shield: Runtime protection that resists disabling and bypassing attempts.
+Multi-language Support: Compatible with Python, Java, Go, C#, C++ through dedicated packagers.
+Important Notice on Source Code
+
