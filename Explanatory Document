@@ -1,0 +1,166 @@
+Explanatory Document: The "Hidden Secrets" (HS) Project
+1. Introduction to the "Hidden Secrets" Project
+
+"Hidden Secrets" (HS) is an advanced software protection system designed to safeguard applications from reverse engineering, tampering, and unauthorized analysis. It employs a multi-layered approach that combines sophisticated obfuscation techniques, self-protection mechanisms integrated into a "Shield," and artificial intelligence to adapt and counter modern threats. The primary goal of HS is to make the code analysis process extremely difficult and costly for an attacker, while ensuring the protected application's original functionality.
+
+2. General Architecture of "Hidden Secrets"
+
+The HS architecture is modular and well-structured, divided into key components that collaborate to provide comprehensive protection:
+
+Core: Central modules for CLI management, configuration, hardware detection, and preliminary analysis.
+
+Engines: Specific modules for applying obfuscation techniques and integrating artificial intelligence.
+
+Packagers: Modules responsible for compiling, bundling the obfuscated code with the Shield, and creating the final executable for different platforms and languages.
+
+Shield Runtime: The core of runtime protection, a native (or VM-specific) component that performs anti-debug and anti-tampering checks and manages the secure loading of the obfuscated payload.
+
+HS Recon Tool: A set of tools and a database for data collection, labeling, and training the AI model, supporting the evolution of the protection system.
+
+3. Functionalities and Components in Detail (By Component)
+
+3.1. core/ Module (Central Logic)
+
+The core/ module manages the fundamental and cross-cutting operations of the HS system.
+
+cli/cli.py (Command-Line Interface):
+
+Function: Serves as the main entry point for the user, handling all commands and interactions.
+
+What it does: Allows launching operations like package (package an application), analyze (analyze an application), status (check HS system status), config (manage configuration), run (execute the protected application), and manage-ai-data (manage AI data).
+
+config_loader.py (Configuration Loader):
+
+Function: Manages the loading, validation, and saving of system configurations.
+
+What it does: Loads JSON configuration files (e.g., config.json) and hardware profile schemas. Validates the structure and content of the configuration against predefined schemas.
+
+hardware_profile.py and hardware_fingerprint.py (Hardware Profiles and Hardware Fingerprint):
+
+Function: Define and manage hardware requirements and generate a unique system fingerprint.
+
+What it does: hardware_profile.py defines structures for minimum or optimal CPU, RAM, GPU requirements. hardware_fingerprint.py collects detailed hardware information and generates a cryptographic hash to create a unique system fingerprint.
+
+analyzer.py (Preliminary Analysis):
+
+Function: Performs static and dynamic preliminary analysis of software to be protected or potentially malicious software.
+
+What it does: Identifies file types and analyzes code/binaries for critical API patterns, sensitive strings, or anomalies.
+
+exceptions.py (Exception Handling):
+
+Function: Defines custom exceptions for HS system-specific errors.
+
+What it does: Improves error handling, making it more specific and readable.
+
+utils.py (Utility Functions):
+
+Function: Contains general utility functions, such as logging, I/O operations, and string/path manipulation.
+
+What it does: Groups reusable code to keep other modules cleaner and focused on their core responsibilities.
+
+3.2. engines/ Module (Obfuscation and AI Engines)
+
+This module contains the heart of HS's transformation and intelligence capabilities.
+
+evolutionary_obfuscator.py (Evolutionary Obfuscator):
+
+Function: Implements advanced obfuscation techniques, potentially with an evolutionary approach for adaptation.
+
+What it does: Contains logic for manipulating Abstract Syntax Trees (ASTs) or bytecode/native code. Examples include variable renaming, dead code injection, control flow flattening, string encryption, and anti-disassembly/anti-tampering techniques.
+
+bytecode_obfuscator.py (Bytecode Obfuscator):
+
+Function: Specializes in obfuscating bytecode (e.g., Python bytecode, Java bytecode).
+
+What it does: Applies transformations at the bytecode instruction level to make the code harder to decompile or analyze.
+
+native_code_obfuscator.py (Native Code Obfuscator):
+
+Function: Specializes in obfuscating compiled machine code (native binaries).
+
+What it does: Applies techniques like useless instruction insertion, low-level control flow modifications, code section encryption, and anti-analysis for C/C++, Go binaries, etc.
+
+ai_integrator.py (AI Integrator):
+
+Function: Bridges the obfuscation engines and the HS artificial intelligence model.
+
+What it does: Loads the pre-trained AI model (ai_guard.onnx). Receives code representations from the obfuscation engines, pre-processes them, and sends them to the model for inference. It uses the model's output to suggest optimal obfuscation techniques or assess code resilience.
+
+3.3. packagers/ Module (Packagers)
+
+These modules handle the final preparation phase of the protected application.
+
+dispatcher.py (Main Dispatcher):
+
+Function: Selects the correct packager based on the programming language of the application to be protected.
+
+What it does: Receives the obfuscated code and language information, then delegates the compilation and bundling process to the specific packager (Python, Java, Go, C#, C++).
+
+python_packager.py, java_packager.go, go_packager.go, csharp_packager.cs, cpp_packager.cpp (Specific Packagers):
+
+Function: Each of these modules is responsible for packaging the obfuscated application with the Shield for its respective language.
+
+What it does: Handles compilation, integrates the obfuscated code with the Shield Runtime, generates the final executable, and modifies the application's entry point so the Shield runs first.
+
+3.4. shield_runtime/ Module (Protection Runtime)
+
+This is the most critical component for runtime security, implemented at a low level to maximize effectiveness against dynamic analysis.
+
+Function: The Shield is the component that executes before the protected application and continuously during its execution, providing self-defense mechanisms.
+
+What it does (Key Functionalities):
+
+Anti-Debug: Detects the presence of debuggers attached to the process and reacts by terminating the application or modifying its behavior.
+
+Code and Data Integrity: Periodically verifies the integrity of critical code and data sections of the application (and the Shield itself) using checksums or cryptographic hashes.
+
+Secure Loader: Manages the decryption and loading of the obfuscated payload into memory in a secure manner, often in protected memory sections.
+
+Anti-Tampering: Detects modifications to files on disk, memory, or the registry (on Windows) that indicate tampering attempts.
+
+Hardware Binding: Verifies that the application is running on the intended hardware by comparing the current hardware fingerprint with the recorded one.
+
+Obfuscated String Decryption: Contains the logic to decrypt strings that have been obfuscated in the main payload.
+
+3.5. hs_recon_tool/ Module (Reconnaissance Tool and AI)
+
+This module is dedicated to data collection and continuous improvement of the AI model.
+
+database/hs_ai_data.db (AI Data Database):
+
+Function: Stores collected code data, snippets, and labels for AI training.
+
+What it does: Contains schemas for tables like CodeSnippet (analyzed code fragments) and CodeFile (code file information).
+
+database_manager.py (Database Manager):
+
+Function: Provides an interface for interacting with the AI data database.
+
+What it does: Manages database connections and queries to insert, read, update, and delete code snippet and file records.
+
+labeling_tool.py (Labeling Tool):
+
+Function: Allows human analysts to label raw code data.
+
+What it does: Displays code snippets or files and allows users to assign labels (e.g., "obfuscation technique X," "malicious code," "vulnerability Y"), which are then used to train the AI model.
+
+ml_analyzer.py (ML Analyzer):
+
+Function: This module trains and evaluates the AI model.
+
+What it does: Takes labeled data from the database, preprocesses it, trains the ai_guard.onnx model (or another machine learning/deep learning model), and evaluates its performance. The goal is to train the AI to recognize code patterns, identify obfuscation techniques, or suggest optimal protection strategies.
+
+4. Key Benefits of "Hidden Secrets"
+
+Multi-Layered Protection: Code obfuscation combined with runtime protection for deep defense.
+
+Adaptive Intelligence: AI integration allows the system to learn and adapt to new threats and de-obfuscation strategies.
+
+Resistance to Reverse Engineering: Significantly increases the time and complexity required to analyze, understand, and modify the application.
+
+Self-Protection: The Shield itself is protected, making it difficult to disable or bypass defenses.
+
+Language Versatility: Support for various programming languages (Python, Java, Go, C#, C++) through dedicated packagers.
+
+In summary, "Hidden Secrets" is a state-of-the-art software protection system that aims to deter and frustrate attackers through an ingenious combination of code transformation techniques and active runtime defenses, supported by continuously evolving artificial intelligence.
